@@ -1,0 +1,26 @@
+<?php
+$servername = "myIPaddress";
+$username = "user";  
+$upassword = "P@$$w0rd";
+$database = "tanweer";
+$connection = mysqli_connect($servername,$username,$upassword,$database);
+$sql1 = "SELECT id FROM Requests WHERE allocated_node_name = this_node_name AND ADDTIME('Starttime','Time_required_for_completion') > CURTIME()";
+$sql2 = "SELECT id FROM Requests WHERE allocated_node_name = this_node_name AND ADDTIME('Starttime','Time_required_for_completion') <= CURTIME()";
+$result1 = mysqli_query($connection, $sql1);
+$result2 = mysqli_query($connection, $sql2);
+if($result1>0)
+{
+	echo "PROCESS IDs</br>";
+	while($row = mysqli_fetch_assoc($result1)){
+		printf("\"%s\"</br>",$row["id"]);
+	}
+}
+if($result2>0)
+{
+	echo "HISTORY<br/>";
+	while($row = mysqli_fetch_assoc($result2)){
+		printf("\"%s\"</br>",$row["id"]);	
+	}
+
+}
+?>
