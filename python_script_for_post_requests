@@ -1,0 +1,12 @@
+import requests
+import random
+import datetime
+while(1){
+	i=random.randint(4,64)
+	j=random.randint(4,64)
+	k=datetime.datetime.now()
+	l=k.strftime("%H:%M:%S")
+	dict={"CPU_required":"i", "Memory_required":"j", "time_required_for_completion":"l"}
+	r = requests.post('http://yoururlofloadbalancer', data=dict)
+	print(r.text)
+}
